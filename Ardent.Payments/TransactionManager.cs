@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Ardent.Payments.Entity;
 using System.Net;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Ardent.Payments {
     public class TransactionManager {
-        public static string RequestPayment(Transaction transaction) {
+        public static TransactionResponse RequestPayment(TransactionRequest transaction) {
             string url = @"https://secure.goemerchant.com/secure/gateway/xmlgateway.aspx";
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -24,22 +26,11 @@ namespace Ardent.Payments {
             using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse()) {
                 //Only for debug
                 using (var stream = new StreamReader(webResponse.GetResponseStream())) {
-                    return stream.ReadToEnd();
+                    var response = stream.ReadToEnd();
+                    XmlSerializer serializer = new XmlSerializer(typeof(TransactionResponse));
+                    return (TransactionResponse)serializer.Deserialize(new StringReader(response));
                 }
             }
-
-            //Stream postData = webRequest.GetRequestStream();
-            //postData.Write(transactionBytes, 0, transactionBytes.Length);
-            //postData.Close();
-
-            //HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            //StreamReader responseReader = new StreamReader(webRequest.GetRequestStream(), System.Text.Encoding.GetEncoding(1252));
-            //string html = responseReader.ReadToEnd();
-
-            //responseReader.Close();
-            //webResponse.Close();
-
-            //return html;
         }
     }
 }

@@ -1,167 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Ardent.Payments.Entity;
@@ -175,7 +12,7 @@ namespace Ardent.Payments.Tests.unit {
 
         [Test]
         public void unit_send_payment_success() {
-            var transaction = new Transaction("1264", "a91c38c3-7d7f-4d29-acc7-927b4dca0dbe");
+            var transaction = new TransactionRequest("1264", "a91c38c3-7d7f-4d29-acc7-927b4dca0dbe");
             transaction.OperationType = OperationType.Sale;
             transaction.OrderID = "1231231254643523434";
             transaction.OrderTotal = 29.99;
@@ -203,7 +40,7 @@ namespace Ardent.Payments.Tests.unit {
             });
 
             var results = TransactionManager.RequestPayment(transaction);
-            results.ShouldNotBe(string.Empty);
+            results.Status.ShouldBe(1);
         }
     }
 }

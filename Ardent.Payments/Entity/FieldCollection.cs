@@ -23,5 +23,15 @@ namespace Ardent.Payments.Entity {
         public void AddRange(List<Field> fields) {
             this.Fields.AddRange(fields);
         }
+
+        public string GetFieldValue(string key) {
+            var field = this.Fields.SingleOrDefault(x => x.Key == key);
+
+            if (field != null) {
+                return field.Value;
+            }
+
+            return null;
+        }
     }
 }

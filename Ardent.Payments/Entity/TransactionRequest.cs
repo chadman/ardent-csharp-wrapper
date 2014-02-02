@@ -10,8 +10,8 @@ using System.IO;
 
 namespace Ardent.Payments.Entity {
     [XmlRoot("TRANSACTION")]
-    public class Transaction {
-        public Transaction() {
+    public class TransactionRequest {
+        public TransactionRequest() {
 
         }
 
@@ -20,7 +20,7 @@ namespace Ardent.Payments.Entity {
         /// </summary>
         /// <param name="transactionCenterID">Unique identifier assigned by gateway. This is your unique Transaction Center number</param>
         /// <param name="gatewayID">Unique identifier assigned by gateway. Can be found and or reset via the Options Tab in the Transaction Center.</param>
-        public Transaction(string transactionCenterID, string gatewayID) {
+        public TransactionRequest(string transactionCenterID, string gatewayID) {
             this.Fields = new FieldCollection();
             this.LineItems = new List<LineItem>();  
 
@@ -146,7 +146,7 @@ namespace Ardent.Payments.Entity {
                 this.Fields.AddRange(this.LineItems[i - 1].ToFields(i));
             }
 
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(Transaction));
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(TransactionRequest));
             StringWriter sww = new StringWriter();
             XmlWriter writer = XmlWriter.Create(sww);
             xsSubmit.Serialize(writer, this);
