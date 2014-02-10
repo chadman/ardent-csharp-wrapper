@@ -60,7 +60,7 @@ namespace Ardent.Payments.Entity {
             fields.Add(new Field("owner_city", this.City));
             fields.Add(new Field("owner_state", this.State));
             fields.Add(new Field("owner_zip", this.Zipcode));
-            fields.Add(new Field("owner_xountry", this.Country));
+            fields.Add(new Field("owner_country", this.Country));
             fields.Add(new Field("owner_email", this.Email));
             fields.Add(new Field("owner_phone", this.Phone));
 
