@@ -37,7 +37,7 @@ namespace Ardent.Payments.Entity {
             fields.Add(new Field("dda", this.RoutingNumber));
             fields.Add(new Field("ach_account_type", this.AccountType.ToDescription()));
             fields.Add(new Field("ach_category_text", this.CategoryText));
-            fields.Add(new Field("cloase_date", this.CloseDate.HasValue ? this.CloseDate.Value.ToShortDateString() : DateTime.Now.ToShortDateString()));
+            fields.Add(new Field("close_date", this.CloseDate.HasValue ? this.CloseDate.Value.ToString("MM/dd/yyyy") : DateTime.Now.ToString("MM/dd/tttt")));
             fields.Add(new Field("ach_name", this.AccountName));
 
             return fields;

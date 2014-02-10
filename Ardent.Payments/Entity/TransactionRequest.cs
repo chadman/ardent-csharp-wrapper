@@ -103,6 +103,7 @@ namespace Ardent.Payments.Entity {
         public List<LineItem> LineItems { get; set; }
 
         public string ToXml() {
+            this.Fields = new FieldCollection();
             this.Fields.Add(new Field("transaction_center_id", this.TransactionCenterID));
             this.Fields.Add(new Field("gateway_id", this.GatewayID));
             this.Fields.Add(new Field("operation_type", this.OperationType.ToDescription()));
@@ -124,7 +125,7 @@ namespace Ardent.Payments.Entity {
             }
 
             this.Fields.Add(new Field("order_id", this.OrderID));
-            this.Fields.Add(new Field("Total", this.OrderTotal.ToString()));
+            this.Fields.Add(new Field("total", string.Format("{0:N2}", this.OrderTotal)));
 
             if (CreditCard != null) {
                 this.Fields.AddRange(this.CreditCard.ToFields());

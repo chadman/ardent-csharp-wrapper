@@ -27,14 +27,13 @@ namespace Ardent.Payments.Tests.unit {
             var transaction = new TransactionRequest(_transactionCenterID, _gatewayID);
             transaction.OperationType = OperationType.Sale;
             transaction.OrderID = string.Format("{0}", rgen.Next(0, 1000) + rgen.Next(1000, 5000));
-            transaction.OrderTotal = 29.99;
-            transaction.RemoteIPAddress = "192.168.1.1";
+            transaction.OrderTotal = 2.00;
             transaction.ProcessorID = _processorID;
-            transaction.OperationType = OperationType.Sale;
+            transaction.OperationType = OperationType.Auth;
 
             transaction.CreditCard = new CreditCard {
                 CardType = CardType.Visa,
-                CardNumber = "4111111111111111",
+                CardNumber = "4716389275666851",
                 CardExpiration = 1214,
                 CloseDate = DateTime.Now
             };
@@ -47,12 +46,12 @@ namespace Ardent.Payments.Tests.unit {
                 Zipcode = "12345-6789"
             };
 
-            transaction.LineItems.Add(new LineItem {
-                ItemSku = "1111",
-                Description = "Test sku",
-                Quantity = 1,
-                Price = 29.99
-            });
+            //transaction.LineItems.Add(new LineItem {
+            //    ItemSku = "1111",
+            //    Description = "Test sku",
+            //    Quantity = 1,
+            //    Price = 2.00
+            //});
 
             var results = TransactionManager.RequestPayment(transaction);
             results.Status.ShouldBe(1);
