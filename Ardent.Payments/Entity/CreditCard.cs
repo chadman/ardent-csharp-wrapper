@@ -25,7 +25,7 @@ namespace Ardent.Payments.Entity {
         /// Credit card expiration date. MMYY format
         /// </summary>
         [XmlIgnore]
-        public int CardExpiration { get; set; }
+        public string CardExpiration { get; set; }
 
         /// <summary>
         /// Credit card security code, cvv2, cvc, cid
@@ -50,7 +50,7 @@ namespace Ardent.Payments.Entity {
 
             fields.Add(new Field("card_name", this.CardType.HasValue ? this.CardType.ToDescription() : "yes"));
             fields.Add(new Field("card_number", this.CardNumber));
-            fields.Add(new Field("card_exp", this.CardExpiration.ToString()));
+            fields.Add(new Field("card_exp", this.CardExpiration));
             fields.Add(new Field("cc_validate", this.ValidateOnly ? "1" : "0"));
             fields.Add(new Field("close_date", this.CloseDate.HasValue ? this.CloseDate.Value.ToString("MM/dd/yyyy") : DateTime.Now.ToString("MM/dd/tttt")));
 

@@ -29,12 +29,11 @@ namespace Ardent.Payments.Tests.unit {
             transaction.OrderID = string.Format("{0}", rgen.Next(0, 1000) + rgen.Next(1000, 5000));
             transaction.OrderTotal = 2.00;
             transaction.ProcessorID = _processorID;
-            transaction.OperationType = OperationType.Auth;
 
             transaction.CreditCard = new CreditCard {
                 CardType = CardType.Visa,
                 CardNumber = "4716389275666851",
-                CardExpiration = 1214,
+                CardExpiration = "1214",
                 CloseDate = DateTime.Now
             };
 
